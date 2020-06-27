@@ -1,0 +1,42 @@
+<mat-card>
+    <h1>Add new plate</h1>
+  <form>
+    <table>
+      <tr>
+<!-- Plate number -->
+        <td>
+            <mat-form-field>
+              <mat-label>Plate Number</mat-label>
+              <input
+                matInput
+                #postalCode
+                maxlength="6"
+                placeholder="Ex. ABC123"
+              />
+              <mat-hint align="end">{{ postalCode.value.length }} / 6</mat-hint>
+            </mat-form-field>
+          </td>
+      </tr>
+<!-- Plate owner name -->
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-label>First name</mat-label>
+            <input matInput />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-label>Last Name</mat-label>
+            <input matInput />
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+  </form>
+</mat-card>
+
+<!-- <input  placeholder="plate number" [(ngModel)]='enteredValue'>
+<button (click)="onAddPlate()">Add</button>
+<p>{{newPlate}}</p>
+<hr> -->
