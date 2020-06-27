@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-plate-add',
@@ -6,12 +6,36 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./plate-add.component.css']
 })
 export class PlateAddComponent implements OnInit {
-  enteredValue= '';
-  newPlate = 'Test';
+  enteredPlateNumber= "";
+  enteredFname = "";
+  enteredLname= "";
+
+  @Output() plateCreated = new EventEmitter();
+
 
   onAddPlate(){
-    this.newPlate = this.enteredValue;
+    const plate = { 
+      number: this.enteredPlateNumber, 
+      fname: this.enteredFname,
+      lname: this.enteredLname
+    }
+    this.plateCreated.emit(plate);
   }
+
+  //test
+  enteredTitle = "";
+  enteredContent = "";
+  @Output() postCreated = new EventEmitter();
+
+  onAddPost() {
+    const post = {
+      title: this.enteredTitle,
+      content: this.enteredContent
+    };
+    this.postCreated.emit(post);
+  }
+
+
 
   constructor() { }
 

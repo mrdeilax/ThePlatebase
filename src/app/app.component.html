@@ -1,2 +1,5 @@
 <app-header></app-header>
-<app-plate-add></app-plate-add>
+<main>
+    <app-plate-add (plateCreated)="onPlateAdded($event)"></app-plate-add>
+    <app-plate-show [plates]="storedPlates"></app-plate-show>
+</main>

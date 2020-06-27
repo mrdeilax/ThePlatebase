@@ -9,18 +9,21 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 //components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { PlateAddComponent } from './plate/plate-add/plate-add.component';
+import { PlateShowComponent } from './plate/plate-show/plate-show.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    PlateAddComponent
+    PlateAddComponent,
+    PlateShowComponent
     
   ],
   imports: [
@@ -31,6 +34,7 @@ import { PlateAddComponent } from './plate/plate-add/plate-add.component';
     MatIconModule,
     MatCardModule,
     MatInputModule,
+    MatExpansionModule,
     FormsModule
   ],
   providers: [],

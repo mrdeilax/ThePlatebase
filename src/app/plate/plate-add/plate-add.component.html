@@ -1,42 +1,45 @@
 <mat-card>
-    <h1>Add new plate</h1>
-  <form>
+  <h1>Add new plate</h1>
+  
     <table>
       <tr>
-<!-- Plate number -->
+        <!-- Plate number -->
         <td>
-            <mat-form-field>
-              <mat-label>Plate Number</mat-label>
-              <input
-                matInput
-                #postalCode
-                maxlength="6"
-                placeholder="Ex. ABC123"
-              />
-              <mat-hint align="end">{{ postalCode.value.length }} / 6</mat-hint>
-            </mat-form-field>
-          </td>
+          <mat-form-field>
+            <mat-label>Plate Number</mat-label>
+            <input
+              matInput
+              #plateNum
+              maxlength="6"
+              type="text"
+              placeholder="Ex. ABC123"
+              [(ngModel)]="enteredPlateNumber"
+              name="plateNumber"
+            />
+            <mat-hint align="end">{{ plateNum.value.length }} / 6</mat-hint>
+          </mat-form-field>
+        </td>
       </tr>
-<!-- Plate owner name -->
+      <!-- Plate owner name -->
       <tr>
         <td>
           <mat-form-field>
             <mat-label>First name</mat-label>
-            <input matInput />
+            <input matInput [(ngModel)]="enteredFname" name="plateFname" />
           </mat-form-field>
         </td>
         <td>
           <mat-form-field>
             <mat-label>Last Name</mat-label>
-            <input matInput />
+            <input matInput [(ngModel)]="enteredLname" name="plateLname" />
           </mat-form-field>
         </td>
       </tr>
     </table>
-  </form>
+  
+  <button 
+    mat-button 
+    (click)="onAddPlate()"
+    type="submit"
+    >Add</button>
 </mat-card>
-
-<!-- <input  placeholder="plate number" [(ngModel)]='enteredValue'>
-<button (click)="onAddPlate()">Add</button>
-<p>{{newPlate}}</p>
-<hr> -->
