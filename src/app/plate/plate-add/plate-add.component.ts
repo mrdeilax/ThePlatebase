@@ -1,43 +1,28 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { NgForm, FormControl, Validators } from '@angular/forms';
+
+import { PlateService } from '../plate.service';
 
 @Component({
   selector: 'app-plate-add',
   templateUrl: './plate-add.component.html',
   styleUrls: ['./plate-add.component.css']
 })
+
 export class PlateAddComponent implements OnInit {
-  enteredPlateNumber= "";
-  enteredFname = "";
-  enteredLname= "";
+  constructor(public plateService: PlateService) { }
 
-  @Output() plateCreated = new EventEmitter();
-
-
-  onAddPlate(){
-    const plate = { 
-      number: this.enteredPlateNumber, 
-      fname: this.enteredFname,
-      lname: this.enteredLname
+  onAddPlate(form: NgForm){
+    if (form.invalid) {
+      return;
     }
-    this.plateCreated.emit(plate);
+
+    this.plateService.addPlate( 
+      form.value.plateNumber,
+      form.value.fname,
+      form.value.lname
+      );
   }
-
-  //test
-  enteredTitle = "";
-  enteredContent = "";
-  @Output() postCreated = new EventEmitter();
-
-  onAddPost() {
-    const post = {
-      title: this.enteredTitle,
-      content: this.enteredContent
-    };
-    this.postCreated.emit(post);
-  }
-
-
-
-  constructor() { }
 
   ngOnInit(): void {
   }

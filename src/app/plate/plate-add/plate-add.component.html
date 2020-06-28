@@ -1,6 +1,6 @@
 <mat-card>
   <h1>Add new plate</h1>
-  
+  <form (submit)="onAddPlate(plateForm)" #plateForm="ngForm">
     <table>
       <tr>
         <!-- Plate number -->
@@ -9,14 +9,19 @@
             <mat-label>Plate Number</mat-label>
             <input
               matInput
-              #plateNum
+              #plateNum="ngModel"
               maxlength="6"
+              minlength="6"
               type="text"
               placeholder="Ex. ABC123"
-              [(ngModel)]="enteredPlateNumber"
+              ngModel
+              required
               name="plateNumber"
             />
-            <mat-hint align="end">{{ plateNum.value.length }} / 6</mat-hint>
+            <mat-error *ngIf="plateNum.invalid">
+              Enter a valid number 
+              <mat-hint align="end">{{ plateNum.value.length }} / 6</mat-hint>
+            </mat-error>
           </mat-form-field>
         </td>
       </tr>
@@ -25,21 +30,33 @@
         <td>
           <mat-form-field>
             <mat-label>First name</mat-label>
-            <input matInput [(ngModel)]="enteredFname" name="plateFname" />
+            <input 
+              matInput 
+              ngModel 
+              required
+              name="plateFname" 
+            />
+            <mat-error *ngIf="plateNum.invalid">Name required</mat-error>
           </mat-form-field>
         </td>
         <td>
           <mat-form-field>
             <mat-label>Last Name</mat-label>
-            <input matInput [(ngModel)]="enteredLname" name="plateLname" />
+            <input 
+              matInput 
+              ngModel 
+              required 
+              name="plateLname" 
+            />
+            <mat-error *ngIf="plateNum.invalid">Surrname required</mat-error>
           </mat-form-field>
         </td>
       </tr>
     </table>
-  
-  <button 
-    mat-button 
-    (click)="onAddPlate()"
-    type="submit"
+
+    <button 
+      mat-button 
+      type="submit"
     >Add</button>
+  </form>
 </mat-card>
