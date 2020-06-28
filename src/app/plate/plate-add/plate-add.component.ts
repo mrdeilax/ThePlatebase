@@ -19,8 +19,8 @@ export class PlateAddComponent implements OnInit {
 
     this.plateService.addPlate( 
       form.value.plateNumber,
-      form.value.fname,
-      form.value.lname
+      form.value.plateFname,
+      form.value.plateLname
       );
   }
 

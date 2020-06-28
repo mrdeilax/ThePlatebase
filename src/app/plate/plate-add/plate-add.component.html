@@ -17,9 +17,10 @@
               ngModel
               required
               name="plateNumber"
+              autocomplete="off"
             />
             <mat-error *ngIf="plateNum.invalid">
-              Enter a valid number 
+              Enter a valid number
               <mat-hint align="end">{{ plateNum.value.length }} / 6</mat-hint>
             </mat-error>
           </mat-form-field>
@@ -34,7 +35,8 @@
               matInput 
               ngModel 
               required
-              name="plateFname" 
+              name="plateFname"
+              autocomplete="off" 
             />
             <mat-error *ngIf="plateNum.invalid">Name required</mat-error>
           </mat-form-field>
@@ -46,7 +48,8 @@
               matInput 
               ngModel 
               required 
-              name="plateLname" 
+              name="plateLname"
+              autocomplete="off" 
             />
             <mat-error *ngIf="plateNum.invalid">Surrname required</mat-error>
           </mat-form-field>

@@ -4,8 +4,10 @@
             {{plate.number}}
         </mat-expansion-panel-header>
         <p>{{plate.fname}} {{plate.lname}}</p>
-        <button mat-raised-button>Edit</button>
-        <button mat-button color="warn">Remove</button>
+        <mat-action-row>
+            <button mat-raised-button>Edit</button>
+            <button mat-button color="warn">Remove</button>
+        </mat-action-row>
     </mat-expansion-panel>
 </mat-accordion>
 <p class="info-text mat-body-1" *ngIf="plates.length <= 0">No plates added yet!</p>
