@@ -1,9 +1,16 @@
 <mat-toolbar color="primary">
-    <button mat-icon-button>
-        <mat-icon>home</mat-icon>
-    </button>
+    <a routerLink="/">
+        <button mat-icon-button>
+            <mat-icon>home</mat-icon>
+        </button>
+    </a>
     <span>The Platebase</span>
     <span class="span-spacer"></span>
-    <button mat-raised-button class="add-button">Add</button>
-    <button mat-raised-button>GitHub</button>
+    <a routerLink="/add">
+        <button mat-raised-button class="add-button">Add</button>
+    </a>
+    <a href="https://github.com/mrdeilax/ThePlatebase"
+    target="_blank">
+        <button mat-raised-button>GitHub</button>
+    </a>
 </mat-toolbar>

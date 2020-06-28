@@ -22,6 +22,15 @@ export class PlateService {
       });
   }
 
+  getPlateId(id: string) {
+    return this.httpClient.get<{
+      _id: string;
+      number: string;
+      fname: string;
+      lname: string;
+    }>('http://localhost:3000/api/plates/' + id);
+  }
+
   //returns an object that we can listen to, but cant emit
   getPlateUpdateListener() {
     return this.plateUpdated.asObservable();
@@ -35,20 +44,37 @@ export class PlateService {
       lname: lname,
     };
     this.httpClient
-      .post<{ message: string, plateId: string }>('http://localhost:3000/api/plates', plate)
+      .post<{ message: string; plateId: string }>(
+        'http://localhost:3000/api/plates',
+        plate
+      )
       .subscribe((responseData) => {
-        const plateId = responseData.plateId
-        plate._id = plateId; 
+        const plateId = responseData.plateId;
+        plate._id = plateId;
         this.plates.push(plate);
         this.plateUpdated.next([...this.plates]);
       });
+  }
+
+  updatePlate(id: string, number: string, fname: string, lname: string) {
+    const plate: Plate = {
+      _id: id,
+      number: number,
+      fname: fname,
+      lname: lname,
+    };
+    this.httpClient
+      .put('http://localhost:3000/api/plates/' + id, plate)
+      .subscribe((response) => console.log(response));
   }
 
   deletePlate(plateId: string) {
     this.httpClient
       .delete('http://localhost:3000/api/plates/' + plateId)
       .subscribe(() => {
-        const updatedPlates = this.plates.filter(plate => plate._id !== plateId);
+        const updatedPlates = this.plates.filter(
+          (plate) => plate._id !== plateId
+        );
         this.plates = updatedPlates;
         this.plateUpdated.next([...this.plates]);
       });

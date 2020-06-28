@@ -17,6 +17,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { PlateAddComponent } from './plate/plate-add/plate-add.component';
 import { PlateShowComponent } from './plate/plate-show/plate-show.component';
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { PlateShowComponent } from './plate/plate-show/plate-show.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,

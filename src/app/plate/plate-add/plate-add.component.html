@@ -1,6 +1,6 @@
 <mat-card>
   <h1>Add new plate</h1>
-  <form (submit)="onAddPlate(plateForm)" #plateForm="ngForm">
+  <form (submit)="onSavePlate(plateForm)" #plateForm="ngForm">
     <table>
       <tr>
         <!-- Plate number -->
@@ -9,12 +9,13 @@
             <mat-label>Plate Number</mat-label>
             <input
               matInput
-              #plateNum="ngModel"
+              #plateNum
+              #platenumber="ngModel"
               maxlength="6"
               minlength="6"
               type="text"
               placeholder="Ex. ABC123"
-              ngModel
+              [ngModel]="plate?.number"
               required
               name="plateNumber"
               autocomplete="off"
@@ -33,10 +34,11 @@
             <mat-label>First name</mat-label>
             <input 
               matInput 
-              ngModel 
+              [ngModel]="plate?.fname" 
               required
               name="plateFname"
-              autocomplete="off" 
+              autocomplete="off"
+              #fname="ngModel" 
             />
             <mat-error *ngIf="plateNum.invalid">Name required</mat-error>
           </mat-form-field>
@@ -46,10 +48,11 @@
             <mat-label>Last Name</mat-label>
             <input 
               matInput 
-              ngModel 
+              [ngModel]="plate?.lname" 
               required 
               name="plateLname"
               autocomplete="off" 
+              #lname="ngModel"
             />
             <mat-error *ngIf="plateNum.invalid">Surrname required</mat-error>
           </mat-form-field>
