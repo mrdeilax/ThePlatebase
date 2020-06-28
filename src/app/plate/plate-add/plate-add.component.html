@@ -15,13 +15,14 @@
               maxlength="6"
               minlength="6"
               type="text"
-              placeholder="Ex. ABC123"
+              placeholder="Ex. abc123"
               [ngModel]="plate?.number"
               required
               name="plateNumber"
               autocomplete="off"
+              pattern="^[a-z]{3}[0-9]+$"
             />
-            <mat-error *ngIf="plateNum.invalid">
+            <mat-error *ngIf="platenumber.invalid">
               Enter a valid number
               <mat-hint align="end">{{ plateNum.value.length }} / 6</mat-hint>
             </mat-error>
@@ -41,7 +42,7 @@
               autocomplete="off"
               #fname="ngModel" 
             />
-            <mat-error *ngIf="plateNum.invalid">Name required</mat-error>
+            <mat-error *ngIf="fname.invalid">Name required</mat-error>
           </mat-form-field>
         </td>
         <td>
@@ -55,7 +56,7 @@
               autocomplete="off" 
               #lname="ngModel"
             />
-            <mat-error *ngIf="plateNum.invalid">Surrname required</mat-error>
+            <mat-error *ngIf="lname.invalid">Surrname required</mat-error>
           </mat-form-field>
         </td>
       </tr>

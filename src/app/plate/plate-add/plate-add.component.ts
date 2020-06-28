@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormControl } from '@angular/forms';
 
 import { PlateService } from '../plate.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -65,3 +65,11 @@ export class PlateAddComponent implements OnInit {
     form.resetForm();
   }
 }
+
+
+// function plateNumberValidator(control: FormControl){
+//     let plateNum = control.value;
+//     if(plateNum && /^[a-zA-Z]+$/.test(plateNum.substr(0,3)) && /^\d+$/.test(plateNum.substr(3,6))){
+      
+//     }
+// }
