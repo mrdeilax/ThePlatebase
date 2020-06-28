@@ -1,25 +1,56 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 
 import { Plate } from './plate.model';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class PlateService {
-    private plates: Plate[] = [];
-    private plateUpdated = new Subject<Plate[]>();
+  private plates: Plate[] = [];
+  private plateUpdated = new Subject<Plate[]>();
 
-    getPlate() {
-        return [...this.plates];
-    }
+  constructor(private httpClient: HttpClient) {}
 
-    //returns an object that we can listen to, but cant emit
-    getPlateUpdateListener(){
-        return this.plateUpdated.asObservable()
-    }
+  getPlate() {
+    this.httpClient
+      .get<{ message: string; plates: Plate[] }>(
+        'http://localhost:3000/api/plates'
+      )
+      .subscribe((plateData) => {
+        this.plates = plateData.plates;
+        this.plateUpdated.next([...this.plates]);
+      });
+  }
 
-    addPlate(number: string, fname: string, lname: string) {
-        const plate: Plate = {number: number, fname: fname, lname: lname}
+  //returns an object that we can listen to, but cant emit
+  getPlateUpdateListener() {
+    return this.plateUpdated.asObservable();
+  }
+
+  addPlate(number: string, fname: string, lname: string) {
+    const plate: Plate = {
+      _id: null,
+      number: number,
+      fname: fname,
+      lname: lname,
+    };
+    this.httpClient
+      .post<{ message: string, plateId: string }>('http://localhost:3000/api/plates', plate)
+      .subscribe((responseData) => {
+        const plateId = responseData.plateId
+        plate._id = plateId; 
         this.plates.push(plate);
         this.plateUpdated.next([...this.plates]);
-    }
+      });
+  }
+
+  deletePlate(plateId: string) {
+    this.httpClient
+      .delete('http://localhost:3000/api/plates/' + plateId)
+      .subscribe(() => {
+        const updatedPlates = this.plates.filter(plate => plate._id !== plateId);
+        this.plates = updatedPlates;
+        this.plateUpdated.next([...this.plates]);
+      });
+  }
 }

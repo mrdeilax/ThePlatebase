@@ -6,7 +6,7 @@
         <p>{{plate.fname}} {{plate.lname}}</p>
         <mat-action-row>
             <button mat-raised-button>Edit</button>
-            <button mat-button color="warn">Remove</button>
+            <button mat-button color="warn" (click)="onDelete(plate._id)">Remove</button>
         </mat-action-row>
     </mat-expansion-panel>
 </mat-accordion>

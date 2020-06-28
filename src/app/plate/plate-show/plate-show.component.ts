@@ -18,7 +18,7 @@ export class PlateShowComponent implements OnInit, OnDestroy {
   constructor(public plateService: PlateService) { }
 
   ngOnInit(): void {
-    this.plates = this.plateService.getPlate();
+    this.plateService.getPlate();
     this.plateSub = this.plateService.getPlateUpdateListener()
       .subscribe((plates: Plate[]) => {
         this.plates = plates;
@@ -29,6 +29,9 @@ export class PlateShowComponent implements OnInit, OnDestroy {
     this.plateSub.unsubscribe();
   }
 
+  onDelete(plateId: string){
+    this.plateService.deletePlate(plateId);
+  }
 
   // plateInfoArr = [
   //   {plateNum: 'aaa123', fname: 'petras', lname: 'jonaitis'},

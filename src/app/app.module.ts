@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from "@angular/common/http";
 
 //material ui
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -35,7 +36,8 @@ import { PlateShowComponent } from './plate/plate-show/plate-show.component';
     MatCardModule,
     MatInputModule,
     MatExpansionModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

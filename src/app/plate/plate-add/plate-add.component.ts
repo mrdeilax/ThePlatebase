@@ -1,5 +1,5 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { NgForm, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 import { PlateService } from '../plate.service';
 
