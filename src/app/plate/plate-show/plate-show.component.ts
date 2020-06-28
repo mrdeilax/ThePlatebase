@@ -10,7 +10,7 @@ import { PlateService } from '../plate.service';
   styleUrls: ['./plate-show.component.css']
 })
 export class PlateShowComponent implements OnInit, OnDestroy {
-
+  isLoading = false;
   plates: Plate[] = [];
   private plateSub: Subscription;
 
@@ -18,9 +18,11 @@ export class PlateShowComponent implements OnInit, OnDestroy {
   constructor(public plateService: PlateService) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.plateService.getPlate();
     this.plateSub = this.plateService.getPlateUpdateListener()
       .subscribe((plates: Plate[]) => {
+        this.isLoading = false;
         this.plates = plates;
       });
   }

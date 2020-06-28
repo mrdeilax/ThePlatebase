@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 
 import { Plate } from './plate.model';
@@ -9,7 +10,7 @@ export class PlateService {
   private plates: Plate[] = [];
   private plateUpdated = new Subject<Plate[]>();
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private router: Router) {}
 
   getPlate() {
     this.httpClient
@@ -53,6 +54,7 @@ export class PlateService {
         plate._id = plateId;
         this.plates.push(plate);
         this.plateUpdated.next([...this.plates]);
+        this.router.navigate(["/"]);
       });
   }
 
@@ -65,7 +67,9 @@ export class PlateService {
     };
     this.httpClient
       .put('http://localhost:3000/api/plates/' + id, plate)
-      .subscribe((response) => console.log(response));
+      .subscribe((response) => {
+        this.router.navigate(["/"]);
+      });
   }
 
   deletePlate(plateId: string) {

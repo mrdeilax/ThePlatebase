@@ -14,6 +14,7 @@ export class PlateAddComponent implements OnInit {
   private mode = 'create';
   private plateId: string;
   plate: Plate;
+  isLoading = false;
 
   constructor(
     public plateService: PlateService,
@@ -25,7 +26,9 @@ export class PlateAddComponent implements OnInit {
       if (paramMap.has('plateId')) {
         this.mode = 'edit';
         this.plateId = paramMap.get('plateId');
+        this.isLoading = true;
         this.plateService.getPlateId(this.plateId).subscribe((plateData) => {
+          this.isLoading = false;
           this.plate = {
             _id: plateData._id,
             number: plateData.number,
@@ -44,6 +47,7 @@ export class PlateAddComponent implements OnInit {
     if (form.invalid) {
       return;
     }
+    this.isLoading = true;
     if (this.mode === 'create') {
       this.plateService.addPlate(
         form.value.plateNumber,

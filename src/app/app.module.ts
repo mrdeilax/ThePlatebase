@@ -11,6 +11,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 //components
 import { AppComponent } from './app.component';
@@ -38,6 +39,7 @@ import { AppRoutingModule } from './app-routing.module';
     MatCardModule,
     MatInputModule,
     MatExpansionModule,
+    MatProgressSpinnerModule,
     FormsModule,
     HttpClientModule
   ],

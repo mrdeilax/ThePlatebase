@@ -1,6 +1,7 @@
 <mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
   <h1>Add new plate</h1>
-  <form (submit)="onSavePlate(plateForm)" #plateForm="ngForm">
+  <form (submit)="onSavePlate(plateForm)" #plateForm="ngForm" *ngIf="!isLoading">
     <table>
       <tr>
         <!-- Plate number -->
