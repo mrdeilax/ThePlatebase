@@ -8,18 +8,19 @@ import { Plate } from './plate.model';
 @Injectable({ providedIn: 'root' })
 export class PlateService {
   private plates: Plate[] = [];
-  private plateUpdated = new Subject<Plate[]>();
+  private plateUpdated = new Subject<{plates: Plate[]; plateCount: number}>();
 
   constructor(private httpClient: HttpClient, private router: Router) {}
 
-  getPlate() {
+  getPlate(platesPerPage: number, currentPage: number) {
+    const queryParams = `?pagesize=${platesPerPage}&page=${currentPage}`;
     this.httpClient
-      .get<{ message: string; plates: Plate[] }>(
-        'http://localhost:3000/api/plates'
+      .get<{ message: string; plates: Plate[], maxPlates: number }>(
+        'http://localhost:3000/api/plates' + queryParams
       )
       .subscribe((plateData) => {
         this.plates = plateData.plates;
-        this.plateUpdated.next([...this.plates]);
+        this.plateUpdated.next({plates: [...this.plates], plateCount: plateData.maxPlates});
       });
   }
 
@@ -50,10 +51,6 @@ export class PlateService {
         plate
       )
       .subscribe((responseData) => {
-        const plateId = responseData.plateId;
-        plate._id = plateId;
-        this.plates.push(plate);
-        this.plateUpdated.next([...this.plates]);
         this.router.navigate(["/"]);
       });
   }
@@ -73,14 +70,7 @@ export class PlateService {
   }
 
   deletePlate(plateId: string) {
-    this.httpClient
-      .delete('http://localhost:3000/api/plates/' + plateId)
-      .subscribe(() => {
-        const updatedPlates = this.plates.filter(
-          (plate) => plate._id !== plateId
-        );
-        this.plates = updatedPlates;
-        this.plateUpdated.next([...this.plates]);
-      });
+    return this.httpClient
+      .delete('http://localhost:3000/api/plates/' + plateId);
   }
 }

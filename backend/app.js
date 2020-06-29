@@ -53,13 +53,26 @@ app.post("/api/plates", (req, res, next) => {
 
 
 app.get("/api/plates", (req, res, next) => {
-  Plate.find().sort({number: 1})
+  const pageSize = +req.query.pagesize;
+  const currentPage = +req.query.page;
+  const plateQuery = Plate.find();
+  let fetchedPlates;
+  if(pageSize && currentPage){
+    plateQuery
+      .skip(pageSize * (currentPage - 1))
+      .limit(pageSize);
+  }
+  plateQuery.find().sort({number: 1})
     .then(documents => {
-        console.log(documents);
-        res.status(200).json({
-            message: "Platecode . fetched succesfully!",
-            plates: documents
-          });
+      fetchedPlates = documents;
+      return Plate.count();
+      })
+      .then(count => {
+      res.status(200).json({
+      message: "Platecode . fetched succesfully!",
+      plates: fetchedPlates,
+      maxPlates: count
+      });
     });
 });
 
