@@ -4,10 +4,11 @@
         <mat-expansion-panel-header>
             {{plate.number}}
         </mat-expansion-panel-header>
+        <h4>Owner:</h4>
         <p>{{plate.fname}} {{plate.lname}}</p>
         <mat-action-row>
             <a mat-raised-button [routerLink]="['/edit',plate._id]">Edit</a>
-            <button mat-button color="warn" (click)="onDelete(plate._id)">Remove</button>
+            <button mat-button color="warn" (click)="onDeleteConfirm(plate._id)">Remove</button>
         </mat-action-row>
     </mat-expansion-panel>
 </mat-accordion>

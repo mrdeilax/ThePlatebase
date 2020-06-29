@@ -1,8 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
+import { MatDialog } from '@angular/material/dialog';
+
 import { Plate } from '../plate.model';
 import { PlateService } from '../plate.service';
+import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component'
 
 @Component({
   selector: 'app-plate-show',
@@ -15,7 +18,7 @@ export class PlateShowComponent implements OnInit, OnDestroy {
   private plateSub: Subscription;
 
 
-  constructor(public plateService: PlateService) { }
+  constructor(public plateService: PlateService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -31,14 +34,10 @@ export class PlateShowComponent implements OnInit, OnDestroy {
     this.plateSub.unsubscribe();
   }
 
-  onDelete(plateId: string){
-    this.plateService.deletePlate(plateId);
+
+
+  onDeleteConfirm(plateId){
+    this.dialog.open(ConfirmDialogComponent,{ data: {id: plateId}})
   }
 
-  // plateInfoArr = [
-  //   {plateNum: 'aaa123', fname: 'petras', lname: 'jonaitis'},
-  //   {plateNum: 'aab223', fname: 'algirdas', lname: 'jonaitis'},
-  //   {plateNum: 'aac323', fname: 'nesugalvoju', lname: 'jonaitis'},
-  //   {plateNum: 'aad423', fname: 'jlol', lname: 'jonaitis'}
-  // ];
-}
+} 

@@ -53,7 +53,7 @@ app.post("/api/plates", (req, res, next) => {
 
 
 app.get("/api/plates", (req, res, next) => {
-  Plate.find().sort({number: -1})
+  Plate.find().sort({number: 1})
     .then(documents => {
         console.log(documents);
         res.status(200).json({

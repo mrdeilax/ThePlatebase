@@ -12,6 +12,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 //components
 import { AppComponent } from './app.component';
@@ -19,6 +21,9 @@ import { HeaderComponent } from './header/header.component';
 import { PlateAddComponent } from './plate/plate-add/plate-add.component';
 import { PlateShowComponent } from './plate/plate-show/plate-show.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+
+
 
 
 @NgModule({
@@ -26,7 +31,8 @@ import { AppRoutingModule } from './app-routing.module';
     AppComponent,
     HeaderComponent,
     PlateAddComponent,
-    PlateShowComponent
+    PlateShowComponent,
+    ConfirmDialogComponent,
     
   ],
   imports: [
@@ -40,6 +46,8 @@ import { AppRoutingModule } from './app-routing.module';
     MatInputModule,
     MatExpansionModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
+    MatPaginatorModule,
     FormsModule,
     HttpClientModule
   ],
